@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Join Waitlist</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 40px auto;
+      }
+      .container {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Join Our Waitlist</h2>
+      <form id="waitlistForm">
+        <input type="email" id="email" placeholder="Your email" required />
+        <input type="text" id="name" placeholder="Your name" />
+        <button type="submit">Join Waitlist</button>
+      </form>
+      <div id="message"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("waitlistForm");
+      const messageDiv = document.getElementById("message");
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwUWQSmR0KqcPWhQhD_l--gZgI7jU9mFzDZVW3b6UzQKBqn57V88nPvfxMdlc-8xrC0HQ/exec"; // Paste your web app URL here
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const data = {
+          email: document.getElementById("email").value,
+          name: document.getElementById("name").value,
+        };
+
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => {
+            messageDiv.innerHTML = "🎉 You're on the list!";
+            messageDiv.style.color = "green";
+            form.reset();
+          })
+          .catch((err) => {
+            messageDiv.innerHTML = "⚠️ Error: Please try again";
+            messageDiv.style.color = "red";
+          });
+      });
+    </script>
+  </body>
+</html>
