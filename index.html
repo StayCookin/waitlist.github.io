@@ -3,212 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join Our Waitlist | Launching Soon</title>
+    <title>Waitlist Solution - CORS Fixed</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
     />
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       body {
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        color: #333;
-        line-height: 1.6;
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+        color: #fff;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px;
+        line-height: 1.6;
       }
 
       .container {
         max-width: 1200px;
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        background: white;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-wrap: wrap;
       }
 
       .hero-section {
         flex: 1;
         min-width: 300px;
-        background: linear-gradient(to bottom right, #3a1c71, #d76d77, #ffaf7b);
-        color: white;
         padding: 50px 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .hero-section::after {
-        content: "";
-        position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .hero-content h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-content p {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
-        position: relative;
-        z-index: 1;
-      }
-
-      .benefits {
-        position: relative;
-        z-index: 1;
-      }
-
-      .benefits h3 {
-        margin-bottom: 15px;
-        font-weight: 500;
-      }
-
-      .benefit-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
-      }
-
-      .benefit-item i {
-        margin-right: 10px;
-        color: #ffdd00;
+        background: rgba(0, 0, 0, 0.3);
       }
 
       .form-section {
         flex: 1;
         min-width: 300px;
         padding: 50px 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        background: white;
+        color: #333;
       }
 
-      .form-section h2 {
-        color: #2c3e50;
-        margin-bottom: 10px;
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #ffcc00;
+      }
+
+      h2 {
         font-size: 2rem;
+        margin-bottom: 15px;
+        color: #1a2a6c;
       }
 
-      .form-section p {
-        color: #7f8c8d;
-        margin-bottom: 30px;
+      p {
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+      }
+
+      .benefits {
+        margin-top: 30px;
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+      }
+
+      .benefit-item i {
+        margin-right: 15px;
+        font-size: 1.5rem;
+        color: #ffcc00;
       }
 
       .waitlist-form {
-        display: flex;
-        flex-direction: column;
+        margin-top: 20px;
       }
 
       .form-group {
-        margin-bottom: 20px;
-        position: relative;
+        margin-bottom: 25px;
       }
 
-      .form-group label {
+      label {
         display: block;
         margin-bottom: 8px;
-        font-weight: 500;
-        color: #2c3e50;
+        font-weight: 600;
+        color: #444;
       }
 
-      .form-group input {
+      input {
         width: 100%;
-        padding: 15px 20px;
-        border: 2px solid #e0e0e0;
+        padding: 15px;
+        border: 2px solid #ddd;
         border-radius: 10px;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        transition: all 0.3s;
       }
 
-      .form-group input:focus {
-        border-color: #3498db;
+      input:focus {
+        border-color: #1a2a6c;
         outline: none;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
       }
 
-      .form-group input.error {
-        border-color: #e74c3c;
-      }
-
-      .error-message {
-        color: #e74c3c;
-        font-size: 0.85rem;
-        margin-top: 5px;
-        display: none;
-      }
-
-      button[type="submit"] {
-        background: linear-gradient(to right, #3498db, #2c3e50);
+      button {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(to right, #1a2a6c, #b21f1f);
         color: white;
         border: none;
-        padding: 16px;
+        border-radius: 10px;
         font-size: 1.1rem;
         font-weight: 600;
-        border-radius: 10px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s;
         margin-top: 10px;
-        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
       }
 
-      button[type="submit"]:hover {
+      button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 7px 20px rgba(52, 152, 219, 0.4);
-      }
-
-      button[type="submit"]:active {
-        transform: translateY(0);
-      }
-
-      .counter {
-        text-align: center;
-        margin: 20px 0;
-        font-weight: 500;
-      }
-
-      .counter span {
-        font-size: 2rem;
-        color: #3498db;
-        font-weight: 700;
+        box-shadow: 0 7px 15px rgba(178, 31, 31, 0.4);
       }
 
       .message {
@@ -219,144 +147,95 @@
         display: none;
       }
 
-      .message.success {
-        background: rgba(46, 204, 113, 0.1);
+      .success {
+        background: rgba(46, 204, 113, 0.2);
         color: #27ae60;
         border: 1px solid #2ecc71;
       }
 
-      .message.error {
-        background: rgba(231, 76, 60, 0.1);
+      .error {
+        background: rgba(231, 76, 60, 0.2);
         color: #c0392b;
         border: 1px solid #e74c3c;
       }
 
-      .social-proof {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-        flex-wrap: wrap;
-      }
-
-      .avatars {
-        display: flex;
-        margin-right: 15px;
-      }
-
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 2px solid white;
-        margin-left: -10px;
-        background: #3498db;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-      }
-
-      .avatar:first-child {
-        margin-left: 0;
-      }
-
-      .social-text {
-        font-size: 0.9rem;
-        color: #7f8c8d;
-      }
-
-      .social-text strong {
-        color: #2c3e50;
-      }
-
-      /* Deployment Guide */
-      .deployment-guide {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        padding: 15px;
-        max-width: 300px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        display: none;
-      }
-
-      .deployment-toggle {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #2c3e50;
-        color: white;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1001;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      /* Error Debug Section */
-      .debug-info {
+      .debug-section {
         background: #fff8e1;
         border-left: 4px solid #ffc107;
-        padding: 15px;
-        margin-top: 20px;
+        padding: 20px;
+        margin-top: 30px;
         border-radius: 0 8px 8px 0;
-        display: none;
+        color: #333;
       }
 
       .debug-title {
         font-weight: bold;
-        margin-bottom: 10px;
-        color: #2c3e50;
+        margin-bottom: 15px;
+        color: #1a2a6c;
+        display: flex;
+        align-items: center;
       }
 
       .debug-content {
         font-family: monospace;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         white-space: pre-wrap;
+        line-height: 1.8;
       }
 
-      /* Media Queries for Responsive Design */
+      .code-block {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        overflow-x: auto;
+      }
+
+      .counter {
+        text-align: center;
+        margin: 25px 0;
+        font-size: 1.2rem;
+      }
+
+      .counter span {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #1a2a6c;
+        display: block;
+        margin-top: 5px;
+      }
+
       @media (max-width: 992px) {
-        .hero-content h1 {
-          font-size: 2.2rem;
-        }
-
-        .hero-section,
-        .form-section {
-          padding: 40px 30px;
-        }
-      }
-
-      @media (max-width: 768px) {
         .container {
           flex-direction: column;
         }
 
-        .hero-content h1 {
-          font-size: 2rem;
-        }
-
         .hero-section,
         .form-section {
           padding: 40px 30px;
         }
 
-        .social-proof {
-          flex-direction: column;
-          text-align: center;
+        h1 {
+          font-size: 2.2rem;
         }
 
-        .avatars {
-          margin: 0 0 15px 0;
+        h2 {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.6rem;
+        }
+
+        .counter span {
+          font-size: 2rem;
         }
       }
 
@@ -370,35 +249,17 @@
           padding: 30px 20px;
         }
 
-        .hero-content h1 {
+        h1 {
           font-size: 1.8rem;
         }
 
-        .form-section h2 {
-          font-size: 1.6rem;
+        h2 {
+          font-size: 1.5rem;
         }
 
-        .counter span {
-          font-size: 1.8rem;
-        }
-
-        .form-group input {
-          padding: 12px 15px;
-        }
-
-        button[type="submit"] {
-          padding: 14px;
-        }
-      }
-
-      @media (max-width: 400px) {
-        .hero-section::before,
-        .hero-section::after {
-          display: none;
-        }
-
-        .counter span {
-          font-size: 1.6rem;
+        input,
+        button {
+          padding: 12px;
         }
       }
     </style>
@@ -406,30 +267,42 @@
   <body>
     <div class="container">
       <div class="hero-section">
-        <div class="hero-content">
-          <h1>Join Our Exclusive Waitlist</h1>
-          <p>
-            Be the first to access our revolutionary platform when we launch.
-            Early subscribers get special perks!
-          </p>
+        <h1>Join Our Exclusive Waitlist</h1>
+        <p>
+          Be among the first to access our platform when we launch. Early
+          subscribers get special benefits!
+        </p>
 
-          <div class="benefits">
-            <h3>Why join now?</h3>
-            <div class="benefit-item">
-              <i class="fas fa-gift"></i>
-              <span>Early access to all features</span>
+        <div class="benefits">
+          <div class="benefit-item">
+            <i class="fas fa-gift"></i>
+            <div>
+              <strong>Early Access</strong>
+              <p>Get first look at all features</p>
             </div>
-            <div class="benefit-item">
-              <i class="fas fa-percent"></i>
-              <span>Special lifetime discount</span>
+          </div>
+
+          <div class="benefit-item">
+            <i class="fas fa-percent"></i>
+            <div>
+              <strong>Special Discount</strong>
+              <p>Lifetime discount for early adopters</p>
             </div>
-            <div class="benefit-item">
-              <i class="fas fa-headset"></i>
-              <span>Priority customer support</span>
+          </div>
+
+          <div class="benefit-item">
+            <i class="fas fa-headset"></i>
+            <div>
+              <strong>Priority Support</strong>
+              <p>Dedicated customer service</p>
             </div>
-            <div class="benefit-item">
-              <i class="fas fa-chart-line"></i>
-              <span>Exclusive growth resources</span>
+          </div>
+
+          <div class="benefit-item">
+            <i class="fas fa-chart-line"></i>
+            <div>
+              <strong>Growth Resources</strong>
+              <p>Exclusive tools and resources</p>
             </div>
           </div>
         </div>
@@ -437,10 +310,10 @@
 
       <div class="form-section">
         <h2>Get Early Access</h2>
-        <p>Join our waitlist today and be the first to know when we launch.</p>
+        <p>Join our waitlist today and be notified when we launch.</p>
 
         <div class="counter">
-          <p>Join the <span>1,247</span> others who have already signed up</p>
+          <p>Join <span>1,247</span> others on the waitlist</p>
         </div>
 
         <form class="waitlist-form" id="waitlistForm">
@@ -449,12 +322,9 @@
             <input
               type="text"
               id="name"
-              name="name"
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
+              required
             />
-            <div class="error-message" id="name-error">
-              Please enter your name
-            </div>
           </div>
 
           <div class="form-group">
@@ -462,90 +332,55 @@
             <input
               type="email"
               id="email"
-              name="email"
-              placeholder="Enter your email"
+              placeholder="Enter your email address"
+              required
             />
-            <div class="error-message" id="email-error">
-              Please enter a valid email address
-            </div>
           </div>
 
-          <button type="submit">Join Waitlist</button>
+          <button type="submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Join Waitlist
+          </button>
 
           <div class="message success" id="successMessage">
-            <i class="fas fa-check-circle"></i> Thank you! You've been added to
+            <i class="fas fa-check-circle"></i> Success! You've been added to
             our waitlist.
           </div>
 
           <div class="message error" id="errorMessage">
-            <i class="fas fa-exclamation-circle"></i> Oops! Something went
-            wrong. Please try again.
-          </div>
-
-          <div class="debug-info" id="debugInfo">
-            <div class="debug-title">Debug Information:</div>
-            <div class="debug-content" id="debugContent"></div>
+            <i class="fas fa-exclamation-circle"></i> Error: Could not submit.
+            Please try again.
           </div>
         </form>
 
-        <div class="social-proof">
-          <div class="avatars">
-            <div class="avatar">JD</div>
-            <div class="avatar">AS</div>
-            <div class="avatar">MK</div>
-            <div class="avatar">+47</div>
+        <div class="debug-section">
+          <div class="debug-title">
+            <i class="fas fa-bug"></i> CORS/Preflight Solution
           </div>
-          <div class="social-text">
-            <strong>Join others</strong> from leading companies
+          <div class="debug-content">
+            To fix CORS and Preflight errors: 1. Update your Google Script:
+
+            <div class="code-block">
+              function doPost(e) { // Handle preflight OPTIONS request if (e &&
+              e.parameter && e.parameter.isOptions) { return
+              handleOptionsRequest(); } // Process data const data =
+              JSON.parse(e.postData.contents); const sheet =
+              SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+              sheet.appendRow([ new Date(), data.name, data.email ]); return
+              createCORSResponse(JSON.stringify({status: "success"})); }
+              function doGet(e) { return handleOptionsRequest(); } function
+              handleOptionsRequest() { return createCORSResponse(""); } function
+              createCORSResponse(content) { return
+              HtmlService.createHtmlOutput(content) .setHeaders({
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type',
+              'Access-Control-Max-Age': '86400' }); }
+            </div>
+
+            2. Redeploy as web app with new version 3. Test using the form above
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="deployment-toggle" id="deploymentToggle">
-      <i class="fas fa-rocket"></i>
-    </div>
-
-    <div class="deployment-guide" id="deploymentGuide">
-      <h3>Deployment & Fix Guide</h3>
-      <p><strong>Fixed Preflight & 405 Errors:</strong></p>
-      <ol>
-        <li>Updated Google Script to handle CORS</li>
-        <li>Added proper headers to responses</li>
-        <li>Included debug mode for troubleshooting</li>
-      </ol>
-
-      <p><strong>Google Script Fix:</strong></p>
-      <pre>
-function doPost(e) {
-  // ... your existing code ...
-
-  // Add CORS headers
-  return ContentService.createTextOutput(JSON.stringify({status: "success"}))
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    });
-}
-
-// Add this for preflight requests
-function doOptions() {
-  return HtmlService.createHtmlOutput('')
-    .setHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    });
-}
-        </pre
-      >
-
-      <p>
-        <strong>Remember:</strong> Redeploy your Google Script after making
-        changes!
-      </p>
     </div>
 
     <script>
@@ -553,176 +388,82 @@ function doOptions() {
         const form = document.getElementById("waitlistForm");
         const nameInput = document.getElementById("name");
         const emailInput = document.getElementById("email");
-        const nameError = document.getElementById("name-error");
-        const emailError = document.getElementById("email-error");
+        const submitBtn = document.getElementById("submitBtn");
         const successMessage = document.getElementById("successMessage");
         const errorMessage = document.getElementById("errorMessage");
-        const debugInfo = document.getElementById("debugInfo");
-        const debugContent = document.getElementById("debugContent");
-        const deploymentToggle = document.getElementById("deploymentToggle");
-        const deploymentGuide = document.getElementById("deploymentGuide");
 
         // Google Apps Script URL (Replace with your own URL)
         const SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycbzCSPfdgb8n4TgZ_--91SkfuPaFrn_AHE7Zcxi4Bzcwee991w6RTSqcmgRa9hbi0Hauyw/exec";
-
-        // Deployment guide toggle
-        deploymentToggle.addEventListener("click", function () {
-          deploymentGuide.style.display =
-            deploymentGuide.style.display === "block" ? "none" : "block";
-        });
+          "https://script.google.com/macros/s/AKfycbyngIadhTB3uJ4Djcv5pCPVBoM125LGGw_I0cOc-2wvQvtA9kHfT10jZWaGPQT6ha5a1w/exec";
 
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
-          // Reset UI states
-          resetFormErrors();
-          hideMessages();
-          debugInfo.style.display = "none";
+          // Reset messages
+          successMessage.style.display = "none";
+          errorMessage.style.display = "none";
 
-          // Validate form
-          if (!validateForm()) return;
+          // Get form data
+          const formData = {
+            name: nameInput.value,
+            email: emailInput.value,
+          };
 
           try {
             // Show loading state
-            setButtonState("loading");
+            submitBtn.innerHTML =
+              '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
 
-            // Prepare data
-            const formData = {
-              name: nameInput.value,
-              email: emailInput.value,
-              timestamp: new Date().toISOString(),
-            };
+            // First, send an OPTIONS request to handle preflight
+            await fetch(SCRIPT_URL, {
+              method: "OPTIONS",
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+              },
+            });
 
-            // Send data to Google Sheets
-            const response = await sendDataToGoogleSheets(formData);
+            // Then send the actual POST request
+            const response = await fetch(SCRIPT_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
 
-            if (response.status === "success") {
+            if (response.ok) {
               // Show success
               successMessage.style.display = "block";
 
               // Update counter
-              updateCounter();
+              const counter = document.querySelector(".counter span");
+              counter.textContent = (
+                parseInt(counter.textContent.replace(/,/g, "")) + 1
+              ).toLocaleString();
 
               // Reset form
               form.reset();
             } else {
-              throw new Error(response.message || "Unknown error");
+              throw new Error("Failed to submit form");
             }
           } catch (error) {
             console.error("Error:", error);
             errorMessage.style.display = "block";
 
-            // Show debug info
-            debugContent.textContent = `Error Details:
-• Message: ${error.message}
-• Time: ${new Date().toLocaleTimeString()}
-• Script URL: ${SCRIPT_URL}
-• Recommendation: Check your Google Script deployment settings`;
-            debugInfo.style.display = "block";
+            // Show detailed error in debug section
+            const debugContent = document.querySelector(".debug-content");
+            debugContent.innerHTML += `\n\nError Details:\n• ${
+              error.message
+            }\n• Time: ${new Date().toLocaleTimeString()}\n• SCRIPT_URL: ${SCRIPT_URL}`;
           } finally {
             // Reset button state
-            setButtonState("ready");
-
-            // Hide messages after delay
-            setTimeout(() => {
-              hideMessages();
-              debugInfo.style.display = "none";
-            }, 8000);
-          }
-        });
-
-        function resetFormErrors() {
-          nameError.style.display = "none";
-          emailError.style.display = "none";
-          nameInput.classList.remove("error");
-          emailInput.classList.remove("error");
-        }
-
-        function hideMessages() {
-          successMessage.style.display = "none";
-          errorMessage.style.display = "none";
-        }
-
-        function validateForm() {
-          let isValid = true;
-
-          if (!nameInput.value.trim()) {
-            nameError.style.display = "block";
-            nameInput.classList.add("error");
-            isValid = false;
-          }
-
-          if (!validateEmail(emailInput.value)) {
-            emailError.style.display = "block";
-            emailInput.classList.add("error");
-            isValid = false;
-          }
-
-          return isValid;
-        }
-
-        function validateEmail(email) {
-          const re =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(String(email).toLowerCase());
-        }
-
-        function setButtonState(state) {
-          const submitBtn = form.querySelector('button[type="submit"]');
-          if (state === "loading") {
             submitBtn.innerHTML =
-              '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            submitBtn.disabled = true;
-          } else {
-            submitBtn.innerHTML = "Join Waitlist";
+              '<i class="fas fa-paper-plane"></i> Join Waitlist';
             submitBtn.disabled = false;
           }
-        }
-
-        async function sendDataToGoogleSheets(data) {
-          // Try both methods to handle CORS issues
-          try {
-            // Method 1: Standard POST request
-            const response = await fetch(SCRIPT_URL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify(data),
-              mode: "cors",
-            });
-
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            return await response.json();
-          } catch (error) {
-            console.log("Standard POST failed, trying alternative method...");
-
-            // Method 2: Alternative approach for Google Script
-            const form = new FormData();
-            form.append("data", JSON.stringify(data));
-
-            const altResponse = await fetch(SCRIPT_URL, {
-              method: "POST",
-              body: form,
-              mode: "no-cors",
-            });
-
-            // Even if we can't get a response, assume success
-            return { status: "success" };
-          }
-        }
-
-        function updateCounter() {
-          const counter = document.querySelector(".counter span");
-          counter.textContent = (
-            parseInt(counter.textContent.replace(/,/g, "")) + 1
-          ).toLocaleString();
-        }
+        });
       });
     </script>
   </body>
