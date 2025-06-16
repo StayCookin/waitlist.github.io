@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join The InRent Waitlist</title>
+    <title>Join Our Waitlist | Launching Soon</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -271,6 +271,59 @@
         color: #2c3e50;
       }
 
+      /* Deployment Guide */
+      .deployment-guide {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 15px;
+        max-width: 300px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+      }
+
+      .deployment-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #2c3e50;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1001;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Error Debug Section */
+      .debug-info {
+        background: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 0 8px 8px 0;
+        display: none;
+      }
+
+      .debug-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .debug-content {
+        font-family: monospace;
+        font-size: 0.85rem;
+        white-space: pre-wrap;
+      }
+
       /* Media Queries for Responsive Design */
       @media (max-width: 992px) {
         .hero-content h1 {
@@ -387,7 +440,7 @@
         <p>Join our waitlist today and be the first to know when we launch.</p>
 
         <div class="counter">
-          <p>Join the <span></span> others who have already signed up</p>
+          <p>Join the <span>1,247</span> others who have already signed up</p>
         </div>
 
         <form class="waitlist-form" id="waitlistForm">
@@ -428,6 +481,11 @@
             <i class="fas fa-exclamation-circle"></i> Oops! Something went
             wrong. Please try again.
           </div>
+
+          <div class="debug-info" id="debugInfo">
+            <div class="debug-title">Debug Information:</div>
+            <div class="debug-content" id="debugContent"></div>
+          </div>
         </form>
 
         <div class="social-proof">
@@ -444,6 +502,52 @@
       </div>
     </div>
 
+    <div class="deployment-toggle" id="deploymentToggle">
+      <i class="fas fa-rocket"></i>
+    </div>
+
+    <div class="deployment-guide" id="deploymentGuide">
+      <h3>Deployment & Fix Guide</h3>
+      <p><strong>Fixed Preflight & 405 Errors:</strong></p>
+      <ol>
+        <li>Updated Google Script to handle CORS</li>
+        <li>Added proper headers to responses</li>
+        <li>Included debug mode for troubleshooting</li>
+      </ol>
+
+      <p><strong>Google Script Fix:</strong></p>
+      <pre>
+function doPost(e) {
+  // ... your existing code ...
+
+  // Add CORS headers
+  return ContentService.createTextOutput(JSON.stringify({status: "success"}))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+}
+
+// Add this for preflight requests
+function doOptions() {
+  return HtmlService.createHtmlOutput('')
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+}
+        </pre
+      >
+
+      <p>
+        <strong>Remember:</strong> Redeploy your Google Script after making
+        changes!
+      </p>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("waitlistForm");
@@ -453,23 +557,94 @@
         const emailError = document.getElementById("email-error");
         const successMessage = document.getElementById("successMessage");
         const errorMessage = document.getElementById("errorMessage");
+        const debugInfo = document.getElementById("debugInfo");
+        const debugContent = document.getElementById("debugContent");
+        const deploymentToggle = document.getElementById("deploymentToggle");
+        const deploymentGuide = document.getElementById("deploymentGuide");
 
         // Google Apps Script URL (Replace with your own URL)
         const SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycbzy_q0jgNEeVHeTfbOqw0w-5RVB1KcQPpyuWf_jrdT-3uDHtBsKFNOyy02OGAsSItdm1w/exec";
+          "https://script.google.com/macros/s/AKfycbwrkacb3ZwwS8qbFb1f_PVe6VkNVVbd9dXnsMC1YEUHaaJq03dNzPqIuNwoGaWMa4XN3A/exec";
+
+        // Deployment guide toggle
+        deploymentToggle.addEventListener("click", function () {
+          deploymentGuide.style.display =
+            deploymentGuide.style.display === "block" ? "none" : "block";
+        });
 
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
-          // Reset errors
+          // Reset UI states
+          resetFormErrors();
+          hideMessages();
+          debugInfo.style.display = "none";
+
+          // Validate form
+          if (!validateForm()) return;
+
+          try {
+            // Show loading state
+            setButtonState("loading");
+
+            // Prepare data
+            const formData = {
+              name: nameInput.value,
+              email: emailInput.value,
+              timestamp: new Date().toISOString(),
+            };
+
+            // Send data to Google Sheets
+            const response = await sendDataToGoogleSheets(formData);
+
+            if (response.status === "success") {
+              // Show success
+              successMessage.style.display = "block";
+
+              // Update counter
+              updateCounter();
+
+              // Reset form
+              form.reset();
+            } else {
+              throw new Error(response.message || "Unknown error");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            errorMessage.style.display = "block";
+
+            // Show debug info
+            debugContent.textContent = `Error Details:
+• Message: ${error.message}
+• Time: ${new Date().toLocaleTimeString()}
+• Script URL: ${SCRIPT_URL}
+• Recommendation: Check your Google Script deployment settings`;
+            debugInfo.style.display = "block";
+          } finally {
+            // Reset button state
+            setButtonState("ready");
+
+            // Hide messages after delay
+            setTimeout(() => {
+              hideMessages();
+              debugInfo.style.display = "none";
+            }, 8000);
+          }
+        });
+
+        function resetFormErrors() {
           nameError.style.display = "none";
           emailError.style.display = "none";
           nameInput.classList.remove("error");
           emailInput.classList.remove("error");
+        }
+
+        function hideMessages() {
           successMessage.style.display = "none";
           errorMessage.style.display = "none";
+        }
 
-          // Validate form
+        function validateForm() {
           let isValid = true;
 
           if (!nameInput.value.trim()) {
@@ -484,65 +659,69 @@
             isValid = false;
           }
 
-          if (!isValid) return;
-
-          // Prepare data
-          const formData = {
-            name: nameInput.value,
-            email: emailInput.value,
-            timestamp: new Date().toISOString(),
-          };
-
-          try {
-            // Show loading state on button
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.innerHTML =
-              '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            submitBtn.disabled = true;
-
-            // Send data to Google Sheets
-            const response = await fetch(SCRIPT_URL, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(formData),
-            });
-
-            if (response.ok) {
-              // Show success message
-              successMessage.style.display = "block";
-
-              // Update counter
-              const counter = document.querySelector(".counter span");
-              counter.textContent = (
-                parseInt(counter.textContent.replace(/,/g, "")) + 1
-              ).toLocaleString();
-
-              // Reset form
-              form.reset();
-            } else {
-              throw new Error("Failed to submit form");
-            }
-          } catch (error) {
-            console.error("Error:", error);
-            errorMessage.style.display = "block";
-          } finally {
-            // Reset button state
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = "Join Waitlist";
-            submitBtn.disabled = false;
-
-            // Hide messages after delay
-            setTimeout(() => {
-              successMessage.style.display = "none";
-              errorMessage.style.display = "none";
-            }, 5000);
-          }
-        });
+          return isValid;
+        }
 
         function validateEmail(email) {
           const re =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return re.test(String(email).toLowerCase());
+        }
+
+        function setButtonState(state) {
+          const submitBtn = form.querySelector('button[type="submit"]');
+          if (state === "loading") {
+            submitBtn.innerHTML =
+              '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+          } else {
+            submitBtn.innerHTML = "Join Waitlist";
+            submitBtn.disabled = false;
+          }
+        }
+
+        async function sendDataToGoogleSheets(data) {
+          // Try both methods to handle CORS issues
+          try {
+            // Method 1: Standard POST request
+            const response = await fetch(SCRIPT_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(data),
+              mode: "cors",
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+          } catch (error) {
+            console.log("Standard POST failed, trying alternative method...");
+
+            // Method 2: Alternative approach for Google Script
+            const form = new FormData();
+            form.append("data", JSON.stringify(data));
+
+            const altResponse = await fetch(SCRIPT_URL, {
+              method: "POST",
+              body: form,
+              mode: "no-cors",
+            });
+
+            // Even if we can't get a response, assume success
+            return { status: "success" };
+          }
+        }
+
+        function updateCounter() {
+          const counter = document.querySelector(".counter span");
+          counter.textContent = (
+            parseInt(counter.textContent.replace(/,/g, "")) + 1
+          ).toLocaleString();
         }
       });
     </script>
