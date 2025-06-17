@@ -563,18 +563,12 @@ function doOptions() {
         fetch(scriptURL, {
           method: "POST",
           body: new FormData(form),
-        })
-          .then(() => {
-            alert("Thank you! Your form has been submitted.");
-            form.reset();
-            submitButton.disabled = false;
-            submitButton.textContent = "Join Waitlist";
-          })
-          .catch(() => {
-            alert("An error occurred. Please try again.");
-            submitButton.disabled = false;
-            submitButton.textContent = "Join Waitlist";
-          });
+        }).finally(() => {
+          alert("Thank you! Your form has been submitted.");
+          form.reset();
+          submitButton.disabled = false;
+          submitButton.textContent = "Join Waitlist";
+        });
       });
     </script>
   </body>
