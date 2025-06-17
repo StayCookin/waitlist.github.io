@@ -564,16 +564,13 @@ function doOptions() {
           method: "POST",
           body: new FormData(form),
         })
-          .then((response) => response.text())
-          .then((data) => {
-            console.log("Success:", data);
+          .then(() => {
             alert("Thank you! Your form has been submitted.");
             form.reset();
             submitButton.disabled = false;
             submitButton.textContent = "Join Waitlist";
           })
-          .catch((error) => {
-            console.error("Error!", error.message);
+          .catch(() => {
             alert("An error occurred. Please try again.");
             submitButton.disabled = false;
             submitButton.textContent = "Join Waitlist";
