@@ -564,7 +564,7 @@ function doOptions() {
           method: "POST",
           body: new FormData(form),
         })
-          .then((response) => response.json())
+          .then((response) => response.text())
           .then((data) => {
             console.log("Success:", data);
             alert("Thank you! Your form has been submitted.");
